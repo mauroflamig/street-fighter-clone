@@ -26,6 +26,7 @@ class Sprite {
       height: 50,
     };
     this.isAttacking = false;
+    this.health = 100;
   }
 
   draw() {
@@ -157,14 +158,16 @@ function animate() {
     player.isAttacking
   ) {
     player.isAttacking = false; // hit only once
-    console.log("player attack");
+    enemy.health -= 20;
+    document.querySelector("#enemyHealth").style.width = enemy.health + "%";
   }
   if (
     rectangleCollision({ rectangle1: enemy, rectangle2: player }) &&
     enemy.isAttacking
   ) {
     enemy.isAttacking = false; // hit only once
-    console.log("enemy attack");
+    player.health -= 20;
+    document.querySelector("#playerHealth").style.width = player.health + "%";
   }
 }
 
@@ -185,7 +188,7 @@ window.addEventListener("keydown", (e) => {
         player.velocity.y = -20;
       }
       break;
-    case " ":
+    case "s":
       player.attack();
       break;
     case "ArrowRight":
