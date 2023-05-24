@@ -37,6 +37,23 @@ const player = new Fighter({
     x: 0,
     y: 0,
   },
+  imageSrc: "./img/samuraiMack/Idle.png",
+  scale: 2.5,
+  frames: 8,
+  offset: {
+    x: 215,
+    y: 157,
+  },
+  sprites: {
+    idle: {
+      imageSrc: "./img/samuraiMack/Idle.png",
+      frames: 8
+    },
+    run: {
+      imageSrc: "./img/samuraiMack/Run.png",
+      frames: 8
+    },
+  },
 });
 
 const enemy = new Fighter({
@@ -52,7 +69,23 @@ const enemy = new Fighter({
     x: -50,
     y: 0,
   },
-  color: "blue",
+  imageSrc: "./img/samuraiMack/Idle.png",
+  scale: 2.5,
+  frames: 8,
+  offset: {
+    x: 215,
+    y: 157,
+  },
+  sprites: {
+    idle: {
+      imageSrc: "./img/samuraiMack/Idle.png",
+      frames: 8
+    },
+    run: {
+      imageSrc: "./img/samuraiMack/Run.png",
+      frames: 8
+    },
+  },
 });
 
 const keys = {
@@ -84,15 +117,20 @@ function animate() {
   player.velocity.x = 0;
   enemy.velocity.x = 0;
 
+  
   // player movement
+  player.image = player.sprites.idle.image;
   if (keys.a.pressed && player.lastKey === "a" && player.position.x - 5 >= 0) {
     player.velocity.x = -5;
+    player.image = player.sprites.run.image;
   } else if (
     keys.d.pressed &&
     player.lastKey === "d" &&
     player.position.x + player.width + 5 <= canvas.width + 1
   ) {
     player.velocity.x = 5;
+    console.log('%cMyProject%cline:130%cplayer.sprites.run', 'color:#fff;background:#ee6f57;padding:3px;border-radius:2px', 'color:#fff;background:#1f3c88;padding:3px;border-radius:2px', 'color:#fff;background:rgb(118, 77, 57);padding:3px;border-radius:2px', player.sprites.run)
+    player.image = player.sprites.run.image;
   }
 
   // enemy movement
