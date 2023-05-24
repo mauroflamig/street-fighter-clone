@@ -47,11 +47,19 @@ const player = new Fighter({
   sprites: {
     idle: {
       imageSrc: "./img/samuraiMack/Idle.png",
-      frames: 8
+      frames: 8,
     },
     run: {
       imageSrc: "./img/samuraiMack/Run.png",
-      frames: 8
+      frames: 8,
+    },
+    jump: {
+      imageSrc: "./img/samuraiMack/Jump.png",
+      frames: 2,
+    },
+    fall: {
+      imageSrc: "./img/samuraiMack/Fall.png",
+      frames: 2,
     },
   },
 });
@@ -79,11 +87,11 @@ const enemy = new Fighter({
   sprites: {
     idle: {
       imageSrc: "./img/samuraiMack/Idle.png",
-      frames: 8
+      frames: 8,
     },
     run: {
       imageSrc: "./img/samuraiMack/Run.png",
-      frames: 8
+      frames: 8,
     },
   },
 });
@@ -112,25 +120,32 @@ function animate() {
   backgroundColor.update();
   shop.update();
   player.update();
-  enemy.update();
+  // enemy.update();
 
   player.velocity.x = 0;
   enemy.velocity.x = 0;
 
-  
   // player movement
-  player.image = player.sprites.idle.image;
+
   if (keys.a.pressed && player.lastKey === "a" && player.position.x - 5 >= 0) {
     player.velocity.x = -5;
-    player.image = player.sprites.run.image;
+    player.switchSprite("run");
   } else if (
     keys.d.pressed &&
     player.lastKey === "d" &&
     player.position.x + player.width + 5 <= canvas.width + 1
   ) {
     player.velocity.x = 5;
-    console.log('%cMyProject%cline:130%cplayer.sprites.run', 'color:#fff;background:#ee6f57;padding:3px;border-radius:2px', 'color:#fff;background:#1f3c88;padding:3px;border-radius:2px', 'color:#fff;background:rgb(118, 77, 57);padding:3px;border-radius:2px', player.sprites.run)
     player.image = player.sprites.run.image;
+    player.switchSprite("run");
+  } else {
+    player.switchSprite("idle");
+  }
+
+  if (player.velocity.y < 0) {
+    player.switchSprite("jump");
+  } else if (player.velocity.y > 0) {
+    player.switchSprite("fall");
   }
 
   // enemy movement
