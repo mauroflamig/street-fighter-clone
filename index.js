@@ -66,6 +66,11 @@ const player = new Fighter({
       frames: 6,
     },
   },
+  attackBox: {
+    offset: { x: 100, y: 50 },
+    width: 160,
+    height: 50,
+  },
 });
 
 const enemy = new Fighter({
@@ -109,6 +114,11 @@ const enemy = new Fighter({
       imageSrc: "./img/kenji/Attack1.png",
       frames: 4,
     },
+  },
+  attackBox: {
+    offset: { x: -170, y: 50 },
+    width: 170,
+    height: 50,
   },
 });
 
@@ -191,19 +201,28 @@ function animate() {
   // detect for collision
   if (
     rectangleCollision({ rectangle1: player, rectangle2: enemy }) &&
-    player.isAttacking
+    player.isAttacking &&
+    player.currentFrame === 4
   ) {
     player.isAttacking = false; // hit only once
     enemy.health -= 20;
     document.querySelector("#enemyHealth").style.width = enemy.health + "%";
   }
+  if (player.isAttacking && player.currentFrame === 4) {
+    player.isAttacking = false;
+  }
+
   if (
     rectangleCollision({ rectangle1: enemy, rectangle2: player }) &&
-    enemy.isAttacking
+    enemy.isAttacking &&
+    enemy.currentFrame === 2
   ) {
     enemy.isAttacking = false; // hit only once
     player.health -= 20;
     document.querySelector("#playerHealth").style.width = player.health + "%";
+  }
+  if (enemy.isAttacking && enemy.currentFrame === 2) {
+    enemy.isAttacking = false;
   }
 
   // End game based on health
