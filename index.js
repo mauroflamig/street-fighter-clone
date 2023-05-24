@@ -12,8 +12,17 @@ const backgroundColor = new Sprite({
     x: 0,
     y: 0,
   },
-  imageSrc: "./img/background.png"
-})
+  imageSrc: "./img/background.png",
+});
+const shop = new Sprite({
+  position: {
+    x: 600,
+    y: 128,
+  },
+  imageSrc: "./img/shop.png",
+  scale: 2.75,
+  frames: 6,
+});
 
 const player = new Fighter({
   position: {
@@ -68,6 +77,7 @@ function animate() {
   c.fillStyle = "black";
   c.fillRect(0, 0, canvas.width, canvas.height);
   backgroundColor.update();
+  shop.update();
   player.update();
   enemy.update();
 
@@ -75,9 +85,13 @@ function animate() {
   enemy.velocity.x = 0;
 
   // player movement
-  if (keys.a.pressed && player.lastKey === "a") {
+  if (keys.a.pressed && player.lastKey === "a" && player.position.x - 5 >= 0) {
     player.velocity.x = -5;
-  } else if (keys.d.pressed && player.lastKey === "d") {
+  } else if (
+    keys.d.pressed &&
+    player.lastKey === "d" &&
+    player.position.x + player.width + 5 <= canvas.width + 1
+  ) {
     player.velocity.x = 5;
   }
 
@@ -125,7 +139,7 @@ window.addEventListener("keydown", (e) => {
       player.lastKey = "a";
       break;
     case "w":
-      if (player.position.y + player.height >= canvas.height) {
+      if (player.position.y + player.height >= canvas.height - 96) {
         player.velocity.y = -20;
       }
       break;
@@ -141,7 +155,7 @@ window.addEventListener("keydown", (e) => {
       enemy.lastKey = "ArrowLeft";
       break;
     case "ArrowUp":
-      if (enemy.position.y + enemy.height >= canvas.height) {
+      if (enemy.position.y + enemy.height >= canvas.height - 96) {
         enemy.velocity.y = -20;
       }
       break;
