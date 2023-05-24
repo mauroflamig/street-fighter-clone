@@ -96,9 +96,17 @@ function animate() {
   }
 
   // enemy movement
-  if (keys.ArrowLeft.pressed && enemy.lastKey === "ArrowLeft") {
+  if (
+    keys.ArrowLeft.pressed &&
+    enemy.lastKey === "ArrowLeft" &&
+    enemy.position.x - 5 >= 0
+  ) {
     enemy.velocity.x = -5;
-  } else if (keys.ArrowRight.pressed && enemy.lastKey === "ArrowRight") {
+  } else if (
+    keys.ArrowRight.pressed &&
+    enemy.lastKey === "ArrowRight" &&
+    enemy.position.x + enemy.width + 5 <= canvas.width + 1
+  ) {
     enemy.velocity.x = 5;
   }
 
