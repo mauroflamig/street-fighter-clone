@@ -61,6 +61,10 @@ const player = new Fighter({
       imageSrc: "./img/samuraiMack/Fall.png",
       frames: 2,
     },
+    attack1: {
+      imageSrc: "./img/samuraiMack/Attack1.png",
+      frames: 6,
+    },
   },
 });
 
@@ -136,7 +140,6 @@ function animate() {
     player.position.x + player.width + 5 <= canvas.width + 1
   ) {
     player.velocity.x = 5;
-    player.image = player.sprites.run.image;
     player.switchSprite("run");
   } else {
     player.switchSprite("idle");
