@@ -22,7 +22,7 @@ function determineWinner({ player, enemy, timerId }) {
   }
 }
 
-let timer = 5;
+let timer = 60;
 let timerId;
 function decreaseTimer() {
   document.querySelector("#timer").innerHTML = timer;
