@@ -7,6 +7,7 @@ canvas.height = 576;
 c.fillRect(0, 0, canvas.width, canvas.height);
 
 const gravity = 0.7;
+
 const backgroundColor = new Sprite({
   position: {
     x: 0,
@@ -268,7 +269,9 @@ window.addEventListener("keydown", (e) => {
         }
         break;
       case "s":
-        player.attack();
+        if (timer !== 0) {
+          player.attack();
+        }
         break;
       default:
         break;
@@ -290,7 +293,9 @@ window.addEventListener("keydown", (e) => {
         }
         break;
       case "ArrowDown":
-        enemy.attack();
+        if (timer !== 0) {
+          enemy.attack();
+        }
         break;
       default:
         break;
