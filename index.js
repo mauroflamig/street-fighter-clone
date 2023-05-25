@@ -161,6 +161,8 @@ function animate() {
   c.fillRect(0, 0, canvas.width, canvas.height);
   backgroundColor.update();
   shop.update();
+  c.fillStyle = "rgba(255, 255, 255,0.1)";
+  c.fillRect(0, 0, canvas.width, canvas.height);
   player.update();
   enemy.update();
 

@@ -23,13 +23,13 @@ function determineWinner({ player, enemy, timerId }) {
   }
 }
 
-let timer = 10;
+let timer = 60;
 let timerId;
 function decreaseTimer() {
   if (timer > 0) {
     timerId = setTimeout(decreaseTimer, 1000);
-    timer--;
     document.querySelector("#timer").innerHTML = timer;
+    timer--;
   }
   if (timer === 0) {
     determineWinner({ player, enemy });
